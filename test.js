@@ -4,4 +4,4 @@ var http = require('http');
 
 var routePath = './test-routes.js';
 
-http.createServer(server([routeBundler(routePath), ...middleware], {})).listen(3002);
+http.createServer(server([routeBundler(routePath), ...middleware], {})).listen(3002, console.log);

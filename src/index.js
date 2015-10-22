@@ -22,21 +22,24 @@ exports.routeBundler = (routerPath, options = {}) => {
 	var routes = require(resolved);
 
 	var bundle = watchify(browserify(__dirname + '/client.js', Object.assign(options, watchify.args)))
-		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: resolved}]})
+		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
 		.transform('babelify')
 		.plugin('livereactload');
 
+	bundle.bundle()
+		.on('error', e => {throw e})
+		.on('data', () => {});
+
+	bundle.on('log', console.log);
+
 	routes.add({
 		'/bundle.js'(req) {
-			console.log('here');
 			return {
 				body: bundle.bundle(),
 				headers: {'content-type': 'application/javascript'}
 			};
 		}
 	});
-
-	console.log(routes.routes());
 
 	return routes;
 };
