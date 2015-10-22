@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "@quarterto/promise-server": "^1.9.0",
+    "@quarterto/promise-server-react": "^1.1.0",
+    "babelify": "^6.4.0",
+    "boulevard": "^2.3.1",
+    "browserify": "^11.2.0",
+    "browserify-replace": "^0.9.0",
+    "livereactload": "^2.0.5",
+    "react-dom": "^0.14.0",
+    "speyside": "^3.0.0",
+    "watchify": "^3.4.0"
+  },
+  "name": "@quarterto/react-server",
+  "version": "1.0.0",
+  "description": "Universal React server plugin for promise-server",
+  "main": "lib",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "boulevard": "^2.3.1",
+    "react": "^0.14.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quarterto/react-server.git"
+  },
+  "keywords": [
+    "react",
+    "server",
+    "universal"
+  ],
+  "author": "Matt Brennan <matt@153.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quarterto/react-server/issues"
+  },
+  "homepage": "https://github.com/quarterto/react-server#readme"
+}
