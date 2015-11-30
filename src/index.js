@@ -27,7 +27,7 @@ function createBundle(resolved, options = {}) {
 					next(null, row);
 				},
 				function flush(next) {
-					const newEntryPath = resolve(process.cwd(), "___reactserver_entry.js")
+					const newEntryPath = path.resolve(process.cwd(), "___reactserver_entry.js")
 
 					this.push({
 						entry: true,
