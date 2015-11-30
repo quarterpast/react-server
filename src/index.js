@@ -21,7 +21,7 @@ exports.middleware = [
 ];
 
 function createBundle(resolved, options = {}) {
-	return browserify(resolved, Object.assign(options, {basedir: process.cwd()}, watchify.args))
+	return browserify(resolved, Object.assign(options, {basedir: process.cwd(), cache: {}, packageCache: {}}))
 		.transform(file => file === resolved ? addStream(from([
 			`require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
 		])) : through())
