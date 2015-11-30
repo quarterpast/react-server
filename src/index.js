@@ -35,7 +35,7 @@ function createBundle(resolved, options = {}) {
 						file: newEntryPath,
 						id: newEntryPath,
 						source: [
-							`require(${JSON.stringify("./" + origFilename)}, entryId$$);`
+							`require(${JSON.stringify(__dirname + '/client.js')}, entryId$$);`
 						],
 						nomap: true,
 						order: 0
