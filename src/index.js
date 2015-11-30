@@ -39,7 +39,7 @@ exports.routeBundler = (routerPath, options = {}) => {
 
 	livereactload.listen();
 
-	var bundle = watchify(reateBundle(resolved, options))
+	var bundle = watchify(createBundle(resolved, options))
 		.transform(livereactload);
 
 	bundle.bundle()
