@@ -1,6 +1,7 @@
 var browserify = require('browserify');
 var watchify = require('watchify');
 var path = require('path');
+var from = require('from')
 
 exports.middleware = [
 	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
@@ -18,7 +19,10 @@ exports.middleware = [
 ];
 
 function createBundle(resolved, options = {}) {
-	return browserify(__dirname + '/client.js', Object.assign(options, {basedir: process.cwd()}, watchify.args))
+	return browserify(
+		from([`require('${__dirname + '/client.js'}')`]),
+		Object.assign(options, {basedir: process.cwd()}, watchify.args)
+	)
 		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
 		.transform('babelify');
 }
