@@ -24,7 +24,7 @@ function createBundle(resolved, options = {}) {
 	return browserify(resolved, Object.assign(options, {basedir: process.cwd()}, watchify.args))
 		.transform(file => file === resolved ? addStream(from([
 			`require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
-		])), through())
+		])) : through())
 		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
 		.transform('babelify');
 }
