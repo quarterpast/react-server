@@ -20,8 +20,7 @@ exports.middleware = [
 function createBundle(resolved, options = {}) {
 	return browserify(__dirname + '/client.js', Object.assign(options, watchify.args))
 		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
-		.transform('babelify')
-		;
+		.transform('babelify');
 }
 
 exports.build = (routerPath, options = {}) => {
@@ -38,7 +37,7 @@ exports.routeBundler = (routerPath, options = {}) => {
 	var routes = require(resolved);
 
 	var bundle = watchify(createBundle(resolved, options))
-		.plugin(require('livereactload'));
+		.plugin('livereactload');
 
 	bundle.bundle()
 		.on('error', e => {throw e})
