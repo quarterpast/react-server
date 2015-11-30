@@ -18,7 +18,7 @@ exports.middleware = [
 ];
 
 function createBundle(resolved, options = {}) {
-	return browserify(__dirname + '/client.js', Object.assign(options, watchify.args))
+	return browserify(__dirname + '/client.js', Object.assign(options, {basedir: process.cwd()}, watchify.args))
 		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
 		.transform('babelify');
 }
