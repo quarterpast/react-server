@@ -23,7 +23,7 @@ exports.middleware = [
 function createBundle(resolved, options = {}) {
 	return browserify(resolved, Object.assign(options, {basedir: process.cwd(), cache: {}, packageCache: {}}))
 		.transform(file => file === resolved ? addStream(from([
-			`require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
+			`;require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
 		])) : through())
 		.transform('babelify');
 }
