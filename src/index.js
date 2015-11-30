@@ -18,15 +18,28 @@ exports.middleware = [
 	`)
 ];
 
+function createBundle(resolved, options = {}) {
+	return browserify(__dirname + '/client.js', Object.assign(options, watchify.args))
+		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
+		.transform('babelify')
+}
+
+exports.build = (routerPath, options = {}) => {
+	var resolved = path.resolve(routerPath);
+	var bundle = createBundle(resolved, options)
+	
+	bundle.on('log', console.error);
+
+	return bundle.bundle();
+};
+
 exports.routeBundler = (routerPath, options = {}) => {
 	var resolved = path.resolve(routerPath);
 	var routes = require(resolved);
 
 	livereactload.listen();
 
-	var bundle = watchify(browserify(__dirname + '/client.js', Object.assign(options, watchify.args)))
-		.transform('browserify-replace', {replace: [{from: /__ROUTES__/, to: `'${resolved}'`}]})
-		.transform('babelify')
+	var bundle = watchify(reateBundle(resolved, options))
 		.transform(livereactload);
 
 	bundle.bundle()
