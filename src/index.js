@@ -44,11 +44,19 @@ exports.routeBundler = (routerPath, options = {}) => {
 	var bundle = watchify(createBundle(resolved, options))
 		.plugin('livereactload');
 
-	bundle.bundle()
-		.on('error', e => {throw e})
-		.on('data', () => {});
-
 	bundle.on('log', console.log);
+
+	function drainBundle({throwError = false} = {}) {
+		return () => bundle.bundle()
+			.on('error', e => {
+				if(throwError) throw e;
+				console.error(e);
+			})
+			.on('data', () => {});
+	}
+	
+	drainBundle({throwError: true})();
+	bundle.on('update', drainBundle())
 
 	routes.add({
 		'/bundle.js'(req) {
