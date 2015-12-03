@@ -2,7 +2,7 @@
 
 var rs = require('./');
 var fs = require('fs');
-var path = require('fs');
+var path = require('path');
 var server = require('@quarterto/promise-server');
 var http = require('http');
 var argv = require('minimist')(process.argv.slice(2), {
