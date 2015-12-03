@@ -14,6 +14,8 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-proxy": "^1.1.1",
+    "react-transform-catch-errors": "^1.0.0",
+    "redbox-noreact": "^1.0.0",
     "speyside": "^3.0.0",
     "through2": "^2.0.0",
     "watchify": "^3.4.0"

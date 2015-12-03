@@ -1,14 +1,21 @@
 {
 	"stage": 0,
-	"plugins": [
-		"react-transform"
-	],
-	"extra": {
-		"react-transform": {
-			"transforms": [{
-				"transform": "livereactload/babel-transform",
-				"imports": ["react"]
-			}]
+	"env": {
+		"development": {
+			"plugins": [
+				"react-transform"
+			],
+			"extra": {
+				"react-transform": {
+					"transforms": [{
+						"transform": "livereactload/babel-transform",
+						"imports": ["react"]
+					}, {
+						"transform": "react-transform-catch-errors",
+						"imports": ["react", "redbox-react"]
+					}]
+				}
+			}
 		}
 	}
 }
