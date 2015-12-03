@@ -25,7 +25,7 @@ function createBundle(resolved, options = {}) {
 		.transform(file => file === resolved ? addStream(from([
 			`;require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
 		])) : through())
-		.transform('babelify');
+		.transform('babelify', options.babel);
 }
 
 exports.build = (routerPath, options = {}) => {
