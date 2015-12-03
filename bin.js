@@ -16,6 +16,7 @@ if(fs.existsSync(path.resolve('.babelrc'))) {
 }
 
 if(argv.build) {
+	process.env['BABEL_ENV'] = 'production';
 	rs.build(argv._[0], argv)
 		.on('error', e => {throw e})
 		.pipe(argv.o ? fs.createWriteStream(argv.o) : process.stdout);
