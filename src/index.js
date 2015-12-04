@@ -36,7 +36,7 @@ function createBundle(resolved, options = {}) {
 						"imports": ["react"]
 					}, {
 						"transform": "react-transform-catch-errors",
-						"imports": ["react", "redbox-react"]
+						"imports": ["react", "redbox-noreact"]
 					}]
 				}
 			}
