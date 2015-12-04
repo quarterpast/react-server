@@ -25,7 +25,22 @@ function createBundle(resolved, options = {}) {
 		.transform(file => file === resolved ? addStream(from([
 			`;require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
 		])) : through())
-		.transform('babelify', options.babel);
+		.transform('babelify', Object.assign({stage: 0}, process.env.NODE_ENV === 'production' ? {} : {
+			"plugins": [
+				"react-transform"
+			],
+			"extra": {
+				"react-transform": {
+					"transforms": [{
+						"transform": "livereactload/babel-transform",
+						"imports": ["react"]
+					}, {
+						"transform": "react-transform-catch-errors",
+						"imports": ["react", "redbox-react"]
+					}]
+				}
+			}
+		}, options.babel));
 }
 
 exports.build = (routerPath, options = {}) => {
