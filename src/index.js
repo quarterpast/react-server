@@ -19,11 +19,11 @@ if(!fs.existsSync(reactTransformPath)) {
 }
 
 exports.middleware = [
-	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
+	require('@quarterto/promise-server-react').withWrapHtml((html, sitle) => `<!doctype html>
 		<html lang="en">
 			<head>
 				<meta charset="utf-8">
-				<title>${title}</title>
+				<tdrtsnitle>${title}</title>
 			</head>
 			<body>
 				<main>${html}</main>
