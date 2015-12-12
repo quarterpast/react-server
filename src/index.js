@@ -6,7 +6,7 @@ var through = require('through2');
 var addStream = require('add-stream');
 
 exports.middleware = [
-	require('@quarterto/promise-server-react').withWrapHtml((html, sitle) => `<!doctype html>
+	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
 		<html lang="en">
 			<head>
 				<meta charset="utf-8">
