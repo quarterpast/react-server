@@ -23,7 +23,7 @@ exports.middleware = [
 		<html lang="en">
 			<head>
 				<meta charset="utf-8">
-				<tdrtsnitle>${title}</title>
+				<title>${title}</title>
 			</head>
 			<body>
 				<main>${html}</main>
