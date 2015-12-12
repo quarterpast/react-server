@@ -6,6 +6,7 @@ var server = require('./server');
 
 var fs = require('fs');
 var path = require('path');
+var cp = require('child_process');
 
 require("babel/register");
 
