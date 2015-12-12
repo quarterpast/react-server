@@ -7,8 +7,11 @@ module.exports = function(routes) {
 		handleResult(result) {
 			ReactDOM.render(result, document.querySelector('main'));
 		},
-		handleError(err) {
-			document.querySelector('main').innerHTML = '<pre>' + err.stack + '</pre>';
+		handleError(req) {
+			return function(err) {
+				console.error(err);
+				document.querySelector('main').innerHTML = '<pre>' + err.stack + '</pre>';
+			};
 		}
 	})).listen();
 };
