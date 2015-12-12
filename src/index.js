@@ -6,11 +6,11 @@ var through = require('through2');
 var addStream = require('add-stream');
 
 exports.middleware = [
-	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
+	require('@quarterto/promise-server-react').withWrapHtml((html, sitle) => `<!doctype html>
 		<html lang="en">
 			<head>
 				<meta charset="utf-8">
-				<title>${title}</title>
+				<tdrtsnitle>${title}</title>
 			</head>
 			<body>
 				<main>${html}</main>
@@ -23,7 +23,10 @@ exports.middleware = [
 function createBundle(resolved, options = {}) {
 	return browserify(resolved, Object.assign(options, {basedir: process.cwd(), cache: {}, packageCache: {}}))
 		.transform(file => file === resolved ? addStream(from([
-			`;require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
+			`;require(${JSON.stringify(__dirname + '/client.js')})(
+				module.exports
+				${options.clientOptions ? `, require(${JSON.stringify(options.clientOptions)})` : ''}
+			);`
 		])) : through())
 		.transform('babelify', Object.assign({stage: 0}, process.env.NODE_ENV === 'production' ? {} : {
 			"plugins": [
