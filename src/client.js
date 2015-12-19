@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var defaults = require('lodash.defaults');
 
 module.exports = function(routes, options) {
-	spey.createServer(promiseServer(routes, defaults(options, {
+	spey.createServer(promiseServer(routes, defaults(options || {}, {
 		handleResult(result) {
 			ReactDOM.render(result, document.querySelector('main'));
 		},
