@@ -5,6 +5,8 @@ var from = require('from');
 var through = require('through2');
 var addStream = require('add-stream');
 
+var reactServerBase = path.resolve(__dirname, '..');
+
 exports.middleware = [
 	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
 		<html lang="en">
@@ -22,16 +24,19 @@ exports.middleware = [
 
 function createBundle(resolved, options = {}) {
 	return browserify(resolved, Object.assign(options, {
-		paths: [path.resolve(__dirname, '../node_modules')],
+		paths: [path.resolve(reactServerBase, 'node_modules')],
 		basedir: process.cwd(),
 		cache: {}, packageCache: {}
 	}))
 		.transform(file => file === resolved ? addStream(from([
 			`;require(${JSON.stringify(__dirname + '/client.js')})(module.exports);`
 		])) : through())
-		.transform('babelify', Object.assign({stage: 0}, process.env.NODE_ENV === 'production' ? {} : {
+		.transform('babelify', Object.assign({
+			stage: 0,
+			basedir: reactServerBase
+		}, process.env.NODE_ENV === 'production' ? {} : {
 			"plugins": [
-				"react-transform"
+				path.resolve(reactServerBase, "node_modules/babel-plugin-react-transform")
 			],
 			"extra": {
 				"react-transform": {
@@ -61,11 +66,11 @@ exports.routeBundler = (routerPath, options = {}) => {
 	var routes = require(resolved);
 
 	var bundle = watchify(createBundle(resolved, options))
-		.plugin('livereactload');
+		.plugin('livereactload', {basedir: reactServerBase});
 
 	function drainBundle() {
 		return bundle.bundle()
-		.on('error', e => console.error(e))
+		.on('error', e => console.error(e.stack))
 		.on('data', () => {});
 	}
 
