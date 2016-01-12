@@ -21,7 +21,7 @@
     "watchify": "^3.4.0"
   },
   "name": "@quarterto/react-server",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Universal React server plugin for promise-server",
   "main": "lib",
   "bin": {
