@@ -1,11 +1,22 @@
 var browserify = require('browserify');
 var watchify = require('watchify');
 var path = require('path');
+var fs = require('fs');
 var from = require('from');
 var through = require('through2');
 var addStream = require('add-stream');
 
 var reactServerBase = path.resolve(__dirname, '..');
+var reactTransformSearch = reactServerBase;
+var reactTransformPath;
+do {
+	reactTransformPath = path.resolve(reactTransformSearch, "node_modules/babel-plugin-react-transform");
+	reactTransformSearch = path.resolve(reactTransformSearch, '../');
+} while(reactTransformSearch !== '/' && !fs.existsSync(reactTransformPath));
+
+if(!fs.existsSync(reactTransformPath)) {
+	throw new Error('babel-plugin-react-transform not found. This shouldn\'t happen. Sorry.');
+}
 
 exports.middleware = [
 	require('@quarterto/promise-server-react').withWrapHtml((html, title) => `<!doctype html>
@@ -39,7 +50,7 @@ function createBundle(resolved, options = {}) {
 			basedir: reactServerBase
 		}, process.env.NODE_ENV === 'production' ? {} : {
 			"plugins": [
-				path.resolve(reactServerBase, "node_modules/babel-plugin-react-transform")
+				reactTransformPath
 			],
 			"extra": {
 				"react-transform": {
