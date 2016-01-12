@@ -1,4 +1,7 @@
 {
+  "name": "@quarterto/react-server",
+  "version": "1.5.2-0",
+  "description": "Universal React server plugin for promise-server",
   "dependencies": {
     "@quarterto/promise-server": "^1.10.0",
     "@quarterto/promise-server-react": "^1.1.0",
@@ -20,9 +23,6 @@
     "through2": "^2.0.0",
     "watchify": "^3.4.0"
   },
-  "name": "@quarterto/react-server",
-  "version": "1.4.3",
-  "description": "Universal React server plugin for promise-server",
   "main": "lib",
   "bin": {
     "react-server": "bin.js"
