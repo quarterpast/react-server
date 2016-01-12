@@ -22,7 +22,7 @@ if(argv['write-server']) {
 		.replace('argv', JSON.stringify(argv));
 
 	fs.writeFileSync(path.resolve(argv['write-server']), serverSrc);
-	cp.execSync('npm install --save-dev @quarterto/promise-server');
+	cp.execSync('npm install --save-dev @quarterto/promise-server babel@5');
 } else if(argv.build) {
 	process.env['BABEL_ENV'] = 'production';
 	rs.build(argv._[0], argv)
