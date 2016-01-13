@@ -68,7 +68,7 @@ function createBundle(resolved, options = {}) {
 
 exports.build = (routerPath, options = {}) => {
 	var resolved = path.resolve(routerPath);
-	var bundle = createBundle(resolved, options)
+	var bundle = createBundle(resolved, options);
 	
 	bundle.on('log', console.error);
 
