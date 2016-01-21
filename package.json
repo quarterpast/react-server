@@ -1,6 +1,6 @@
 {
   "name": "@quarterto/react-server",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Universal React server plugin for promise-server",
   "dependencies": {
     "@quarterto/promise-server": "^1.10.0",
