@@ -5,6 +5,7 @@
   "dependencies": {
     "@quarterto/promise-server": "^1.10.0",
     "@quarterto/promise-server-react": "^1.1.0",
+    "@quarterto/react-title": "^1.1.0",
     "add-stream": "^1.0.0",
     "babel": "^5.8.23",
     "babel-plugin-react-transform": "^1.1.1",
