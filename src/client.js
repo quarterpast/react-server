@@ -5,7 +5,7 @@ var defaults = require('lodash.defaults');
 var reactTitle = require('@quarterto/react-title');
 
 module.exports = function(routes, options) {
-	spey.createServer(promiseServer(routes, defaults(options || {}, {
+	module.exports.server = spey.createServer(promiseServer(routes, defaults(options || {}, {
 		handleResult(result) {
 			var component = ReactDOM.render(result, document.querySelector('main'));
 			document.title = reactTitle(result, component);
